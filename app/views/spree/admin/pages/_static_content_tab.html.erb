@@ -1,1 +1,3 @@
-<%= tab *[:pages], url: admin_pages_path, icon: 'file' %>
+<% if can? :admin, Spree::Page %>
+  <%= tab *[:pages], icon: 'leaf' %>
+<% end %>
