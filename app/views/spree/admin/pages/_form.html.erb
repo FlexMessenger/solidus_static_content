@@ -13,13 +13,32 @@
       <%= f.error_message_on :slug %>
     <% end %>
 
-    <%= f.field_container :body do %>
-      <%= f.label :body %> <span class="required">*</span><br />
-      <%= f.text_area :body, {rows: 12, :class => 'fullwidth'} %>
-      <%= f.error_message_on :body %>
+    <%= f.field_container :meta_title do %>
+      <%= f.label :meta_title %><br />
+      <%= f.text_field :meta_title, :class => 'fullwidth title' %>
+      <%= f.error_message_on :meta_title %>
     <% end %>
 
+    <%= f.field_container :meta_keywords do %>
+      <%= f.label :meta_keywords %><br />
+      <%= f.text_field :meta_keywords, :class => 'fullwidth title' %>
+      <%= f.error_message_on :meta_keywords %>
+    <% end %>
+
+    <%= f.field_container :meta_description do %>
+      <%= f.label :meta_description %><br />
+      <%= f.text_field :meta_description, :class => 'fullwidth title' %>
+      <%= f.error_message_on :meta_description %>
+    <% end %>
+
+    <%= f.field_container :stores do %>
+      <%= f.label :stores, Spree.t(:stores)%><br />
+      <% Spree::Store.all.each do |store| %>
+        <%= check_box_tag "page[store_ids][]", store.id, @page.stores.include?(store) %> <%= store.name %>
+      <% end %>
+    <% end %>
   </div>
+
   <div class="right four columns omega" data-hook="admin_page_form_right">
 
     <%= f.field_container :layout do %>
@@ -62,33 +81,13 @@
       <%= f.label :render_layout_as_partial %>
     <% end %>
 
-    <%= f.field_container :stores do %>
-      <%= f.label :stores, Spree.t(:stores)%><br />
-      <% Spree::Store.all.each do |store| %>
-        <%= check_box_tag "page[store_ids][]", store.id, @page.stores.include?(store) %> <%= store.name %>
-      <% end %>
-    <% end %>
-    
   </div>
 
   <div data-hook="admin_page_form_meta" class="alpha omega twelve columns">
-
-    <%= f.field_container :meta_title do %>
-      <%= f.label :meta_title %><br />
-      <%= f.text_field :meta_title, :class => 'fullwidth title' %>
-      <%= f.error_message_on :meta_title %>
-    <% end %>
-
-    <%= f.field_container :meta_keywords do %>
-      <%= f.label :meta_keywords %><br />
-      <%= f.text_field :meta_keywords, :class => 'fullwidth title' %>
-      <%= f.error_message_on :meta_keywords %>
-    <% end %>
-
-    <%= f.field_container :meta_description do %>
-      <%= f.label :meta_description %><br />
-      <%= f.text_field :meta_description, :class => 'fullwidth title' %>
-      <%= f.error_message_on :meta_description %>
+    <%= f.field_container :body do %>
+      <%= f.label :body %> <span class="required">*</span><br />
+      <%= f.text_area :body, {rows: 12, :class => 'fullwidth'} %>
+      <%= f.error_message_on :body %>
     <% end %>
 
   </div>
